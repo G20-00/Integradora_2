@@ -1,0 +1,4 @@
+package model;
+public enum EnumCategory{
+	NEWBIE, LITTLE_CONTRIBUTOR, MILD_CONTRIBUTOR ,STAR_CONTRIBUTOR
+}
