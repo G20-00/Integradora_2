@@ -24,8 +24,8 @@ public class Main{
 			System.out.println("1. Crear un nuevo usuario 						\n"+"2. Crear una lista de reproduccion\n"+
 							"3. Crear una cancion		 						\n" + "4. Anadir Cancion a una lista de reproduccion\n"+
 							"5. Imprimir usuarios \n"+
-							"6. Imprimir canciones compartidas \n"+ "7. Imprimir Listas de Reproduccion \n"+
-							"8. Salir\n");
+							"6. Imprimir canciones compartidas \n"+ "7. Imprimir Listas de Reproduccion \n"+"8. Calificar listas de reproduccion\n"+
+							"9. Salir\n");
 			int eleccion = numScan.nextInt();
 			
 			
@@ -51,8 +51,11 @@ public class Main{
 					showList();
 			break ;
 			case 8:
-					run = false; 
+					 calificarPublic();
 			break;
+			case 9:
+				run = false;
+			break ;
 			}
 		}
 	}
@@ -126,6 +129,7 @@ public class Main{
 		int eleccion = numScan.nextInt();
 		switch(eleccion){
 			case 1:
+				mcs.addPlayList(nameList,duraccion);
 				run= false;
 			break;
 			case 2:
@@ -140,17 +144,39 @@ public class Main{
 				System.out.println("Nombre de editor 5:" );
 				String name5 = scan.nextLine();
 				run= false;
-				mcs.addPlaylist(nameList,duraccion,name1,name2,name3,name4,name5);
+				mcs.addPlayList(nameList,duraccion,name1,name2,name3,name4,name5);
 			break;
 			case 3:
 				System.out.println("Nombre de usuario editor");
 				String name = scan.nextLine();
 				run= false;
-				mcs.addPlaylist(nameList,duraccion,name);
+				mcs.addPlayList(nameList,duraccion,name);
 			break;
 			}
 		}
 		
+	}
+	public void calificarPublic(){
+		if(mcs.validacionExistenciaPublic()== true){
+				System.out.println("Listas de reproduccion que puede calificar");
+				System.out.println("Elija una opcion");
+				System.out.println(mcs.calificacion());
+				int choice = numScan.nextInt();
+				boolean run = true;
+				while(run){
+				
+				System.out.println("LA CALIFICACION DEBE ESTAR EN 1 Y 5");
+				System.out.println("¿Que calificacion le daras?");
+				int qualification = numScan.nextInt();
+				if(qualification>= 1 && qualification<= 5){
+					System.out.println(mcs.changeRating(choice,qualification));
+					run = false;
+				}
+			}
+		}
+	else{
+		System.out.println("No hay listas de reproduccion publicas");
+	}
 	}
 	public void showUser(){
 		System.out.println(mcs.showUser());
@@ -165,12 +191,20 @@ public class Main{
 		System.out.println("Escoja el numero de la Lista de Reproduccion");
 		System.out.println(mcs.showLists());
 		int numList= numScan.nextInt();
-		if(mcs.verificadorPlayList(numList)== 2){
+		if(mcs.verificadorPlayList(numList)==1){
+			System.out.println("Escoja el numero de la cancion");
+			System.out.println(mcs.showSong());
+			int numSong = numScan.nextInt();
+			mcs.addSongPlay(numList,numSong);
+			mcs.addGenrePay(numList,numSong);
+			
+		}else if(mcs.verificadorPlayList(numList)== 2){
 		boolean run = true;
 		while(run){
 		System.out.println("Escriba el usuario editor");
 		String usuario= scan.nextLine();
-		if(mcs.validar(numList,usuario)== true){
+		int contador = 0;
+		if(mcs.validar(numList,usuario)== true && contador < 3){
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
@@ -180,6 +214,7 @@ public class Main{
 		}
 		else{
 			System.out.println("Error en el usuario");
+			contador++;
 		}
 		}
 		}

@@ -39,4 +39,7 @@ private String genre;
 
 			return out;
 	}
+	public void changeRaiting(int qualification){
+		
+	}	
 }

@@ -13,6 +13,7 @@ public class Mcs {
 		playLists = new PlayList[MAX_PLAYLIST];
 		poolSongs = new Song[MAX_SONGS];
 		countain = new String[MAX_USERS];
+		
 	}
 	// añadir usuario 
 	public void addUser(String nombre, String clave,int edad ){
@@ -26,14 +27,48 @@ public class Mcs {
 			}
 		}
 	}
+	// existencia del public 
+	public boolean validacionExistenciaPublic(){
+		boolean out = false;
+		for(int i = 0;i< playLists.length; i++){
+			if(playLists[i] != null){
+				if(playLists[i] instanceof Public ){
+					out = true;
+				}
+			}		
+		}
+		return out;	
+	}
+	// calificacion del public
+	public String calificacion(){
+		String out = "";
+		for(int i = 0;i< playLists.length; i++){
+			if(playLists[i] != null){
+				if(playLists[i] instanceof Public ){
+					out += i+"-"+playLists[i].getName()+"\n";
+				}	
+			}		
+		}
+		return out;	
+	}
+	// Cambio de calificacion
+	public String changeRating(int choice, int qualification){
+		String out = "ESCOJA UNA OPCION VALIDA";
+		if(playLists[choice] instanceof Public ){
+			
+			playLists[choice].changeRaiting(qualification);
+			out = "Calificacion Exitosa";
+		}
+		return out;
+		
+	}
 	//verificacion tipo de lista de Reproduccion
 	public int verificadorPlayList(int posicion){
 		int num = 0;
-		for(int i = 0;i< playLists.length; i++){
 			if(playLists[posicion] != null){
-				//if(playLists[i] instanceof Public ){
-				//	num = 1;
-				//}
+				if(playLists[posicion] instanceof Public ){
+					num = 1;
+				}
 				if(playLists[posicion] instanceof Private){
 					num = 2;
 				}
@@ -41,7 +76,7 @@ public class Mcs {
 					num = 3;
 				}
 			}
-		}
+		
 		return num;
 	}
 	
@@ -96,7 +131,7 @@ public class Mcs {
 	String text = "";
 		for(int i = 0; (i < playLists.length);i++){
 			if(playLists[i]!= null ){
-				text += (i+ " -" +playLists[i].getName());
+				text += (i+ " -" +playLists[i].getName()+"\n");
 			}
 		}
 		return text;
@@ -122,7 +157,7 @@ public class Mcs {
 		playLists[numList].updateGenre(genre);
 	}
 	// restringida
-	public void addPlaylist(String name,int duraccion,String name1,String name2, String name3,String name4,String name5){
+	public void addPlayList(String name,int duraccion,String name1,String name2, String name3,String name4,String name5){
 		String genre = "";
 		PlayList list = new Restringed(name,duraccion,genre,name1,name2,name3,name4,name5);
 			boolean run = false ;
@@ -130,15 +165,26 @@ public class Mcs {
 				if(playLists[i] == null){
 					playLists[i] = list;
 					run = true ;
-				}
-			else{
-				System.out.println("No puede registrar mas listas de reproduccion");
+				}	
 			}
+	}
+	//public
+	public void addPlayList(String name,int duraccion){
+		String genre = "";
+		double calificacion = 0;
+		PlayList list = new Public(name,duraccion,genre,calificacion);
+		boolean run = false ;
+			for(int i = 0 ; (i < playLists.length) && !run; i++){
+				if(playLists[i] == null){
+					playLists[i] = list;
+					run = true;
+				}
+		
 				
 			}
 	}
 	// private
-	public void addPlaylist(String name,int duraccion,String name1){
+	public void addPlayList(String name,int duraccion,String name1){
 		String genre = "";
 		PlayList list = new Private(name,duraccion,genre,name1);
 			boolean run = false ;
@@ -147,9 +193,7 @@ public class Mcs {
 					playLists[i] = list;
 					run = true;
 				}
-			else{
-				System.out.println("No puede registrar listas de reproduccion");
-			}
+		
 				
 			}
 	}

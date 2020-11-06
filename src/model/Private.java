@@ -12,15 +12,7 @@ public class Private extends PlayList{
 	public String getName1(){
 	return name1;
 	}
-	@Override
-	public boolean  addSongPlaylist(String name){
-		boolean out = false ;
-		System.out.println("Funciona private");
-		if(getName1().equalsIgnoreCase(name)){
-			out = false;
-		}
-		return out;
-	}
+	
 	@Override
 	public String showList(){
 		String out = "";
