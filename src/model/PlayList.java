@@ -3,7 +3,7 @@ public abstract class PlayList {
 private String nombre;
 private int duraccion;
 private String genre;
-private Song[] songs;
+
 
 
 	public PlayList(String nombre,int duraccion,String genre){

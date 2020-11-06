@@ -29,17 +29,20 @@ public class Mcs {
 	//verificacion tipo de lista de Reproduccion
 	public int verificadorPlayList(int posicion){
 		int num = 0;
-		for(int i = 0; (i< playLists,length); i++){
+		for(int i = 0;i< playLists.length; i++){
 			if(playLists[posicion] != null){
-				if(playLists[i] instanceof Public ){
-					num = 1;
-				}
-				else if(playLists[i] instanceof Private){
+				//if(playLists[i] instanceof Public ){
+				//	num = 1;
+				//}
+				if(playLists[posicion] instanceof Private){
 					num = 2;
 				}
-				else if(playLists[i] instanceof Restringed)
+				else if(playLists[posicion] instanceof Restringed){
+					num = 3;
+				}
 			}
 		}
+		return num;
 	}
 	
 	

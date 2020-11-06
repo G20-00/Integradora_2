@@ -165,6 +165,7 @@ public class Main{
 		System.out.println("Escoja el numero de la Lista de Reproduccion");
 		System.out.println(mcs.showLists());
 		int numList= numScan.nextInt();
+		if(mcs.verificadorPlayList(numList)== 2){
 		boolean run = true;
 		while(run){
 		System.out.println("Escriba el usuario editor");
@@ -181,7 +182,7 @@ public class Main{
 			System.out.println("Error en el usuario");
 		}
 		}
-		
+		}
 	}
 	}
 
