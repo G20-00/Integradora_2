@@ -30,5 +30,13 @@ private Song[] songs;
 	}
 	public void updateDuration(int newDuration){
 		duraccion+= newDuration;
-}
+	}	
+	public void updateGenre(String genre1){
+		genre+= (genre1+",");
+	}
+	public boolean  addSongPlaylist(String name){
+		boolean out= false;
+
+			return out;
+	}
 }

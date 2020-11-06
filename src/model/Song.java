@@ -5,13 +5,15 @@ private String artista;
 private String fechaLanzamiento;
 private int duraccion;
 private EnumGenre genre;
+private User user;
 
-	public Song(String titulo,String artista,String fechaLanzamiento,int duraccion,String genre){
+	public Song(String titulo,String artista,String fechaLanzamiento,int duraccion,String genre,User user){
 		this.titulo= titulo;
 		this.artista = artista;
 		this.fechaLanzamiento = fechaLanzamiento;
 		this.duraccion = duraccion;
 		this.genre= EnumGenre.valueOf(genre.toUpperCase().replace(' ','_'));
+		this.user =user;
 		
 	}
 	public String getTitulo() {
@@ -29,9 +31,12 @@ private EnumGenre genre;
 	public EnumGenre getGenero(){
 		return genre;
 	}
+	public User getUser(){
+		return user;
+	}
 	public String showData(){
 		String out = "";
-		out= ("\n******Song******"+"\n Titulo :"+ getTitulo() + "\n Artista :"+ getArtista() + "\n Duraccion :"+getDuraccion()+"\n Genero :"+ getGenero());
+		out= ("\n******Song******"+"\n Titulo :"+ getTitulo() + "\n Artista :"+ getArtista() + "\n Duraccion :"+getDuraccion()+"\n Genero :"+ getGenero()+("\n Usuario:"+user.getName()));
 		return out;
 	}
 	public String showSongs(){

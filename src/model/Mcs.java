@@ -14,7 +14,7 @@ public class Mcs {
 		poolSongs = new Song[MAX_SONGS];
 		countain = new String[MAX_USERS];
 	}
-	
+	// añadir usuario 
 	public void addUser(String nombre, String clave,int edad ){
 		String category= "NEWBIE";
 		boolean run = false;
@@ -26,7 +26,24 @@ public class Mcs {
 			}
 		}
 	}
-	public String showUser(){ // users
+	//verificacion tipo de lista de Reproduccion
+	public int verificadorPlayList(int posicion){
+		int num = 0;
+		for(int i = 0; (i< playLists,length); i++){
+			if(playLists[posicion] != null){
+				if(playLists[i] instanceof Public ){
+					num = 1;
+				}
+				else if(playLists[i] instanceof Private){
+					num = 2;
+				}
+				else if(playLists[i] instanceof Restringed)
+			}
+		}
+	}
+	
+	
+	public String showUser(){ // users completos datos 
 		String text = "";
 		for(int i = 0; (i<users.length);i++){
 			if(users[i] != null){
@@ -54,7 +71,15 @@ public class Mcs {
 		}
 		return text;
 	}
-	
+	public String nameUser(){ // solo nombre usuarios 
+		String text = "";
+		for(int i = 0; (i<users.length);i++){
+			if(users[i] != null){
+				text += (i +users[i].showUser());
+			}
+		}
+		return text;
+	}
 	public String showSong(){ //Solo nombre cancion 
 	String text = "";
 		for(int i = 0; (i < poolSongs.length);i++){
@@ -64,14 +89,34 @@ public class Mcs {
 		}
 		return text;
 	}
-	public String showLists(String nameList){ //solo nombre Playlist
+	public String showLists(){ //solo nombre Playlist
 	String text = "";
 		for(int i = 0; (i < playLists.length);i++){
-			if(playLists[i].getName() == nameList ){
-				text += ("la lista si existe");
+			if(playLists[i]!= null ){
+				text += (i+ " -" +playLists[i].getName());
 			}
 		}
 		return text;
+	}
+	
+	public boolean validar(int numList , String usuario){
+		boolean out = false;
+		Private nueva =(Private)playLists[numList];
+		if(nueva.getName1().equals(usuario)){
+			out= true;	
+		}
+		return out;
+	}
+	
+	//Cambio del tiempo playLists
+	public void addSongPlay(int numList,int numSong){
+		int time =poolSongs[numSong].getDuraccion();
+		playLists[numList].updateDuration(time);
+	}
+	//cambio genero Playlist
+	public void addGenrePay(int numList,int numSong){
+		String genre =poolSongs[numSong].getGenero().toString();
+		playLists[numList].updateGenre(genre);
 	}
 	// restringida
 	public void addPlaylist(String name,int duraccion,String name1,String name2, String name3,String name4,String name5){
@@ -105,8 +150,9 @@ public class Mcs {
 				
 			}
 	}
-	public void addSong(String titulo,String artista,String fechaLanzamiento ,int duraccion,String genero){
-				Song list = new Song(titulo,artista,fechaLanzamiento,duraccion,genero);
+	public void addSong(String titulo,String artista,String fechaLanzamiento ,int duraccion,String genero,int posicion){
+				
+				Song list = new Song(titulo,artista,fechaLanzamiento,duraccion,genero,users[posicion]);
 				boolean run = false;
 				for(int i = 0; (i< poolSongs.length) && !run; i++ ){
 					if(poolSongs[i] == null){
@@ -118,6 +164,5 @@ public class Mcs {
 			
 				
 	}
-	
 	
 }

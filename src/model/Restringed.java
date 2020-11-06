@@ -13,6 +13,7 @@ public class Restringed  extends PlayList{
 		this.name3= name3;
 		this.name4= name4;
 		this.name5= name5;
+		super.updateDuration(duraccion);
 	} 
 	public String getName1(){
 		return name1;
@@ -33,7 +34,7 @@ public class Restringed  extends PlayList{
 	@Override
 	public String showList(){
 		String out = "";
-		out =("******PlayList******"+"\n**Nombre de la playList :"+ getName() + "\n**Duraccion :" + getDuraccion()+"\n**Generos :"+getGenre()
+		out =("\n******PlayList******"+"\n**Nombre de la playList :"+ getName() + "\n**Duraccion :" + getDuraccion()+"\n**Generos :"+getGenre()
 		+"\n**Nombre de editores :"+"\n*"+getName1()+"\n*"+getName2()+"\n*"+getName3()+"\n*"+ getName4()+"\n*" +getName5()+"\n********************"	);
 		return out;
 	}
@@ -43,4 +44,5 @@ public class Restringed  extends PlayList{
 		out =("******PlayList******"+"\n**Nombre de la playList :"+ getName());
 		return out;
 	}
+	
 }

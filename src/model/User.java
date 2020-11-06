@@ -28,5 +28,11 @@ public String showDat(){
 	String out = "";
 	out = ("*****User*****"+"\n **Nombre :"+ getName()+ "\n **Edad :"+ getEdad()+"\n **Categoria :"+getCategory()+"\n***************\n");
 	return out;
+	
+}
+public String showUser(){
+	String out= "";
+	out = getName();
+	return out;
 }
 }

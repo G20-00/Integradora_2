@@ -42,16 +42,16 @@ public class Main{
 					addSongPlay();
 			break;
 			case 5: 
-				showUser();
+					showUser();
 			break;
 			case 6:
-				showSongs();	
+					showSongs();	
 			break;
 			case 7:
-				showList();
+					showList();
 			break ;
 			case 8:
-			run = false; 
+					run = false; 
 			break;
 			}
 		}
@@ -69,6 +69,9 @@ public class Main{
 		mcs.addUser(name,clave,age);
 	}
 	public void crearCancion() {
+		System.out.println("Elige el usuario con el cual agregaras la cancion");
+		System.out.println(mcs.nameUser());
+		int posicion = numScan.nextInt();
 		System.out.println("Nombre de la cancion");
 		String name = scan.nextLine();
 		System.out.println("Artista");
@@ -77,10 +80,40 @@ public class Main{
 		String fechaLanzamiento = scan.nextLine();
 		System.out.println("Duraccion de la cancion");
 		int duraccion = numScan.nextInt();
-		System.out.println("Genero: \n"+"ROCK \n"+ "HIP_HOP"+"MUSICA_CLASICA,\n"+"REGGAE\n"+ "SALSA\n");
-		String genero = scan.nextLine();
-		mcs.addSong(name,artista,fechaLanzamiento,duraccion,genero);
+		String genero = "";
+		boolean run=true;
+		while (run){
+			System.out.println("Seleccione el genero\n"+"1- ROCK \n"+ "2- HIP_HOP\n"+"3- MUSICA_CLASICA\n"+"4- REGGAE\n"+ "5 SALSA\n");
+			int eleccion = numScan.nextInt();
+			
+			
+		switch(eleccion){
+			case 1: 
+					genero = "ROCK";
+					run = false;
+			break; 
+				
+			case 2:
+					genero = "HIP_HOP";
+					run = false;
+			break ;
+			case 3: 
+					genero = "MUSICA_CLASICA";
+					run = false;
+			break; 
+			case 4:
+					genero = "REGGAE";
+					run = false;
+			break;
+			case 5: 
+					genero = "SALSA";
+					run = false;
+			break;
 		
+			
+			}
+			mcs.addSong(name,artista,fechaLanzamiento,duraccion,genero,posicion);
+		}
 	}
 	public void addPlayList(){
 		boolean run = true ;
@@ -115,7 +148,7 @@ public class Main{
 				run= false;
 				mcs.addPlaylist(nameList,duraccion,name);
 			break;
-		}
+			}
 		}
 		
 	}
@@ -129,11 +162,26 @@ public class Main{
 		System.out.println(mcs.showList());
 	}
 	public void addSongPlay(){
-		System.out.println("Escriba el nombre de la lista de reproduccion a la cual va agregar la cancion");
-		String nameList= scan.nextLine();
-		String print = mcs.showLists(nameList);
-		System.out.println(print);
-		
+		System.out.println("Escoja el numero de la Lista de Reproduccion");
+		System.out.println(mcs.showLists());
+		int numList= numScan.nextInt();
+		boolean run = true;
+		while(run){
+		System.out.println("Escriba el usuario editor");
+		String usuario= scan.nextLine();
+		if(mcs.validar(numList,usuario)== true){
+			System.out.println("Escoja el numero de la cancion");
+			System.out.println(mcs.showSong());
+			int numSong = numScan.nextInt();
+			mcs.addSongPlay(numList,numSong);
+			mcs.addGenrePay(numList,numSong);
+			run = false ;
+		}
+		else{
+			System.out.println("Error en el usuario");
+		}
+		}
 		
 	}
-}
+	}
+
