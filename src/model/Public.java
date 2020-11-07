@@ -6,6 +6,7 @@ public class Public extends PlayList{
 		super(nombre,duraccion,genre);
 		this.calificacion = calificacion;
 		countain = 0;
+		super.time();
 	}
 	public double getCalificacion(){
 		return calificacion;
@@ -13,7 +14,7 @@ public class Public extends PlayList{
 		@Override
 	public String showList(){
 		String out = "";
-		out =("\n******PlayList******"+"\n**Nombre de la playList :"+ getName() + "\n**Duraccion :" + getDuraccion()+"\n**Generos :"+getGenre()
+		out =("\n******PlayList******"+"\n**Nombre de la playList :"+ getName() + "\n**Duraccion :" +time ()+"\n**Generos :"+getGenre()
 		+"\n**Calificacion :"+qualification()+"\n********************"	);
 		return out;
 	}
@@ -34,4 +35,5 @@ public class Public extends PlayList{
 		double out= calificacion/countain;
 		return out;
 	}
+	
 }

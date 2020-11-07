@@ -41,5 +41,22 @@ private String genre;
 	}
 	public void changeRaiting(int qualification){
 		
-	}	
+	}
+	public boolean revisarUsuario(String usuario){
+		boolean out= false ;
+		
+		return out;
+	}
+	public String time(){
+		String time = "";
+		int min = 0;
+		int sec = getDuraccion();
+		while(sec >=60){
+				sec -=60;
+				min++;
+				time = String.valueOf(min);
+				time += ":"+String.valueOf(sec);
+			}
+		return time;	
+	}
 }
