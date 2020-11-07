@@ -101,7 +101,7 @@ public class Main{
 		System.out.println("Elige el usuario con el cual agregaras la cancion");
 		System.out.println(mcs.nameUser());
 		int posicion = numScan.nextInt();
-		if(mcs.positionvalidUser(posicion) == true){
+		if(mcs.positionValidUser(posicion) == true){
 		System.out.println("Nombre de la cancion");
 		String name = scan.nextLine();
 		System.out.println("Artista");
@@ -155,6 +155,7 @@ public class Main{
 		}	
 	}
 	public void addPlayList(){
+		if(mcs.existenceUser()== true){
 		boolean run = true ;
 		int duraccion = 0;
 		while(run){
@@ -175,15 +176,25 @@ public class Main{
 				if(users>= 1 && users <= 5){
 				int user[] = new int[users];
 				System.out.println(mcs.nameUser());
+				int countain = 0;
 				for(int i= 0;i< users;i++){
 					
 					System.out.println("Escoja el numero del editor :" );
 					int name = numScan.nextInt();
-					user[i]=name;
-				
+					if(mcs.positionValidUser(name)== true){
+						user[i]=name;
+						countain = 1;
+					}else{
+						System.out.println("Usuario no valido");
+					}
+				}
+				if(countain == 1){
+				mcs.addPlayList(nameList,duraccion,user);
+				System.out.println("Se creo con exito");
+				}else{
+					System.out.println(" ¡ERROR! usuarios invalidos"+"\nNo se creo lista de reproduccion");
 				}
 				run= false;
-				mcs.addPlayList(nameList,duraccion,user);
 				}
 				else {
 					System.out.println("Error numero de usuarios invalido ");
@@ -193,10 +204,18 @@ public class Main{
 				System.out.println("Escoja el usuario");
 				System.out.println(mcs.nameUser());
 				int name = numScan.nextInt();
-				run= false;
-				mcs.addPlayList(nameList,duraccion,name);
+				if(mcs.positionValidUser(name)== true){
+					run= false;
+					mcs.addPlayList(nameList,duraccion,name);
+					System.out.println("Se creo con exito");
+				}else{
+					System.out.println("¡ERROR! Usuario invalido"+"\n No se creo lista de reproduccion");
+				}
 			break;
 			}
+		}
+		}else{
+			System.out.println("Debe crear un usuario");
 		}
 		
 	}
@@ -232,19 +251,26 @@ public class Main{
 		System.out.println(mcs.showList());
 	}
 	public void addSongPlay(){
+		if(mcs.existenceUser()== true && mcs.existenceSongs()== true){
 		int contador = 1;
 		int attempts= 3;
 		System.out.println("Escoja el numero de la Lista de Reproduccion");
 		System.out.println(mcs.showLists());
 		int numList= numScan.nextInt();
-		if(mcs.verificadorPlayList(numList)==1){
+		if(mcs.positionValidPlayList(numList) == true){
+		if(mcs.verificadorPlayList(numList)==1){ // public
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
+			if(mcs.positionValidSong(numSong) == true){
 			mcs.addSongPlay(numList,numSong);
 			mcs.addGenrePay(numList,numSong);
-			
-		}else if(mcs.verificadorPlayList(numList)== 2){
+			}else{
+				System.out.println("La cancion no existe");
+				
+			}
+		}
+		else if(mcs.verificadorPlayList(numList)== 2){// private
 		boolean run = true;
 		while(run){
 		System.out.println("Escriba el usuario editor");
@@ -253,9 +279,14 @@ public class Main{
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
+			if(mcs.positionValidSong(numSong)==true){
 			mcs.addSongPlay(numList,numSong);
 			mcs.addGenrePay(numList,numSong);
 			run = false ;
+			}else{
+				System.out.println("La cancion no existe");
+				run = false ;
+			}
 		}
 		else{
 			System.out.println("Error en el usuario");
@@ -270,7 +301,7 @@ public class Main{
 		}
 		}
 		}
-		else if(mcs.verificadorPlayList(numList)== 3){
+		else if(mcs.verificadorPlayList(numList)== 3){// restringed 
 		boolean run = true;
 		while(run){
 		System.out.println("Escriba el usuario editor");
@@ -279,9 +310,15 @@ public class Main{
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
+			if(mcs.positionValidSong(numSong)==true){
 			mcs.addSongPlay(numList,numSong);
 			mcs.addGenrePay(numList,numSong);
 			run = false ;
+			}
+			else{
+				System.out.println("La cancion no existe");
+				run = false ;
+			}
 		}
 		else{
 			System.out.println("Error en el usuario");
@@ -296,6 +333,13 @@ public class Main{
 		}
 		}
 		}
+		}else {
+			System.out.println("Lista de reproduccion no existe");
+		}
+	}	else{
+		System.out.println("Debe crear un Lista de reproduccion y una cancion");
+		}
+	
 	}
 	}
 

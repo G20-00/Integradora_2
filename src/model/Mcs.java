@@ -230,7 +230,30 @@ public class Mcs {
 		}
 		return out;
 	}
-	public boolean positionvalidUser(int posicion){
+	public boolean existenceSongs(){
+		boolean out = false;
+		for(int i= 0;i< poolSongs.length;i++){
+			if(poolSongs[i] != null){
+				out = true;
+			}
+		}
+		return out;
+	}
+	public boolean positionValidSong(int posicion){
+		boolean out = false;
+		if(poolSongs[posicion] != null){
+			out = true;
+		}
+		return out;
+	}
+	public boolean positionValidPlayList(int posicion){
+		boolean out = false;
+		if(playLists[posicion] != null){
+			out = true;
+		}
+		return out;
+	}
+	public boolean positionValidUser(int posicion){
 		boolean out = false;
 		if(users[posicion] != null){
 			out = true;

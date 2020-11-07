@@ -51,12 +51,17 @@ private String genre;
 		String time = "";
 		int min = 0;
 		int sec = getDuraccion();
+		if(sec >= 60){
 		while(sec >=60){
 				sec -=60;
 				min++;
 				time = String.valueOf(min);
 				time += ":"+String.valueOf(sec);
 			}
+		}else {
+			time = "00:"+String.valueOf(sec);
+		}
+		
 		return time;	
 	}
 }

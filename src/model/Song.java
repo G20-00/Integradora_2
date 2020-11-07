@@ -36,7 +36,7 @@ private User user;
 	}
 	public String showData(){
 		String out = "";
-		out= ("\n******Song******"+"\n Titulo :"+ getTitulo() + "\n Artista :"+ getArtista() + "\n Duraccion :"+time()+"\n Genero :"+ getGenero()+("\n Usuario:"+user.getName()));
+		out= ("\n******Song******"+"\n Titulo :"+ getTitulo() + "\n Artista :"+ getArtista() + "\n Duraccion :"+time()+"\n Genero :"+ getGenero()+"\n Usuario:"+user.getName()+"\n****************\n");
 		return out;
 	}
 	public String showSongs(){
@@ -48,12 +48,17 @@ private User user;
 		String time = "";
 		int min = 0;
 		int sec = getDuraccion();
+		if(sec >= 60){
 		while(sec >=60){
 				sec -=60;
 				min++;
 				time = String.valueOf(min);
 				time += ":"+String.valueOf(sec);
 			}
+		}else {
+			time = "00:"+String.valueOf(sec);
+		}
+		
 		return time;	
 	}
 }

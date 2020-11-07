@@ -29,7 +29,7 @@ public class Restringed  extends PlayList{
 		int count = 1;
 		for(int i = 0;i<users.length;i++){
 		if(users[i] !=null){
-			out += "\n"+users[i].getName();
+			out += "\n**"+users[i].getName();
 				
 			}
 		}
