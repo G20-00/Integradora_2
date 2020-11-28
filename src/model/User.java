@@ -30,7 +30,12 @@ public User(String name, String key, int age,String category){
 	public EnumCategory getCategory(){
 		return category;
 	}
-
+/**
+	*showDat:return the data of a user
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String out 
+	*/
 public String showDat(){
 	String out = "";
 	out = ("*****User*****"+"\n **Nombre :"+ getName()+ "\n **Edad :"+ getAge()+"\n **Categoria :"+category()+"\n***************\n");
