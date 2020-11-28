@@ -1,32 +1,44 @@
 package model;
 public class Song{
-private String titulo;
-private String artista;
-private String fechaLanzamiento;
-private int duraccion;
+private String title;
+private String artist;
+private String releaseDate;
+private int duration;
+
+//Relationships
 private EnumGenre genre;
 private User user;
-
-	public Song(String titulo,String artista,String fechaLanzamiento,int duraccion,String genre,User user){
-		this.titulo= titulo;
-		this.artista = artista;
-		this.fechaLanzamiento = fechaLanzamiento;
-		this.duraccion = duraccion;
+	/**
+	 * Constructor
+	 * @param title is a String 
+	 * @param artist is a int
+	 * @param releaseDate is a String
+	 * @param duration is a int
+	 * @param genre is a String
+	 * @param user is a object 
+	 */
+	public Song(String title,String artist,String releaseDate,int duration,String genre,User user){
+		this.title= title;
+		this.artist = artist;
+		this.releaseDate = releaseDate;
+		this.duration = duration;
 		this.genre= EnumGenre.valueOf(genre.toUpperCase().replace(' ','_'));
 		this.user =user;
+		 
 		
 	}
-	public String getTitulo() {
-		return titulo; 
+	//getters
+	public String getTitle() {
+		return title; 
 	}
-	public String getArtista() {
-		return artista ;
+	public String getArtist() {
+		return artist ;
 	}
-	public String getFechaLanzamiento(){
-		return fechaLanzamiento;
+	public String getreleaseDate(){
+		return releaseDate;
 	}
-	public int getDuraccion(){
-		return duraccion;
+	public int getDuration(){
+		return duration;
 	}
 	public EnumGenre getGenero(){
 		return genre;
@@ -34,20 +46,38 @@ private User user;
 	public User getUser(){
 		return user;
 	}
+	/**
+	*showData:Print the data of each song
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String out 
+	*/
 	public String showData(){
 		String out = "";
-		out= ("\n******Song******"+"\n Titulo :"+ getTitulo() + "\n Artista :"+ getArtista() + "\n Duraccion :"+time()+"\n Genero :"+ getGenero()+"\n Usuario:"+user.getName()+"\n****************\n");
+		out= ("\n******Song******"+"\n Titulo :"+ getTitle() + "\n Artista :"+ getArtist() + "\n Duraccion :"+time()+"\n Genero :"+ getGenero()+"\n Usuario:"+user.getName()+"\n****************\n");
 		return out;
 	}
+	/**
+	*showSongs:Print the titles of each song
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String out 
+	*/
 	public String showSongs(){
 		String out = "";
-		out += (" Titulo :"+ getTitulo());
+		out += (" Titulo :"+ getTitle());
 		return out;
 	}
+	/**
+	*showData:convert seconds to minutes
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String time
+	*/
 	public String time(){
 		String time = "";
 		int min = 0;
-		int sec = getDuraccion();
+		int sec = getDuration();
 		if(sec >= 60){
 		while(sec >=60){
 				sec -=60;

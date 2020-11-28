@@ -2,17 +2,29 @@ package ui;
 import model.*;
 import java.util.Scanner;
 public class Main{
-	private Mcs mcs;
+	
 	private Scanner scan  = new Scanner(System.in);
 	private	Scanner numScan = new Scanner(System.in);
 	private int countainUsers ;
+	//Relationships
+	private Mcs mcs;
+	
+	/**
+	 * Constructor
+	 *initialize variables
+	 */
 	public Main(){
 	mcs = new Mcs();
 	scan= new Scanner(System.in);
 	numScan = new Scanner(System.in);
 	countainUsers = 0;
 	}
-	
+	/**
+	*main: inicialize initialize variables
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param args []String
+	*/	
 	public static void main (String[] args){
 		Main m=new Main();
 		m.menu();
@@ -50,13 +62,13 @@ public class Main{
 			
 			
 		switch(eleccion){
-			case 1: addUsuario();
+			case 1: addUser();
 			break; 
 				
 			case 2:
 					addPlayList();
 			break ;
-			case 3: crearCancion();
+			case 3: createSong();
 			break; 
 			case 4:
 					addSongPlay();
@@ -71,7 +83,7 @@ public class Main{
 					showList();
 			break ;
 			case 8:
-					 calificarPublic();
+					 ratePublic();
 			break;
 			case 9:
 				run = false;
@@ -79,7 +91,12 @@ public class Main{
 			}
 		}
 	}
-	public void addUsuario(){
+	/**
+	*addUser: create users
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/	
+	public void addUser(){
 		countainUsers++;
 		if(countainUsers<11){
 		System.out.println("Nombre");
@@ -89,28 +106,33 @@ public class Main{
 		scan.nextLine();
 		
 		System.out.println("Clave");
-		String clave = scan.nextLine();
+		String key = scan.nextLine();
 		
-		mcs.addUser(name,clave,age);
+		mcs.addUser(name,key,age);
 		}else {
 			System.out.println("Supero el numero maximo de usuarios");
 		}
 	}
-	public void crearCancion() {
+	/**
+	*createSong: create song 
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/	
+	public void createSong() {
 		if(mcs.existenceUser()== true){
 		System.out.println("Elige el usuario con el cual agregaras la cancion");
 		System.out.println(mcs.nameUser());
-		int posicion = numScan.nextInt();
-		if(mcs.positionValidUser(posicion) == true){
+		int position = numScan.nextInt();
+		if(mcs.positionValidUser(position) == true){
 		System.out.println("Nombre de la cancion");
 		String name = scan.nextLine();
 		System.out.println("Artista");
-		String artista = scan.nextLine();
+		String artist = scan.nextLine();
 		System.out.println("Fecha de lanzamiento Dia/mes/anio");
-		String fechaLanzamiento = scan.nextLine();
+		String releaseDate = scan.nextLine();
 		System.out.println("Duraccion de la cancion");
-		int duraccion = numScan.nextInt();
-		String genero = "";
+		int duration = numScan.nextInt();
+		String gener = "";
 		boolean run=true;
 		while (run){
 			System.out.println("Seleccione el genero\n"+"1- ROCK \n"+ "2- HIP_HOP\n"+"3- MUSICA_CLASICA\n"+"4- REGGAE\n"+ "5 SALSA\n");
@@ -119,30 +141,30 @@ public class Main{
 			
 		switch(eleccion){
 			case 1: 
-					genero = "ROCK";
+					gener = "ROCK";
 					run = false;
 			break; 
 				
 			case 2:
-					genero = "HIP_HOP";
+					gener = "HIP_HOP";
 					run = false;
 			break ;
 			case 3: 
-					genero = "MUSICA_CLASICA";
+					gener = "MUSICA_CLASICA";
 					run = false;
 			break; 
 			case 4:
-					genero = "REGGAE";
+					gener = "REGGAE";
 					run = false;
 			break;
 			case 5: 
-					genero = "SALSA";
+					gener = "SALSA";
 					run = false;
 			break;
 		
 			
 			}
-			System.out.println(mcs.addSong(name,artista,fechaLanzamiento,duraccion,genero,posicion));
+			System.out.println(mcs.addSong(name,artist,releaseDate,duration,gener,position));
 		
 			}
 		}
@@ -154,10 +176,15 @@ public class Main{
 			System.out.println("Debe crear un Usuario");
 		}	
 	}
+	/**
+	*addPlayList: create the playlist
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/	
 	public void addPlayList(){
 		if(mcs.existenceUser()== true){
 		boolean run = true ;
-		int duraccion = 0;
+		int duration = 0;
 		while(run){
 		System.out.println("Nombre de la lista de reproduccion");
 		String nameList = scan.nextLine();
@@ -166,7 +193,7 @@ public class Main{
 		int eleccion = numScan.nextInt();
 		switch(eleccion){
 			case 1:
-				mcs.addPlayList(nameList,duraccion);
+				mcs.addPlayList(nameList,duration);
 				run= false;
 			break;
 			case 2:
@@ -189,7 +216,7 @@ public class Main{
 					}
 				}
 				if(countain == 1){
-				mcs.addPlayList(nameList,duraccion,user);
+				mcs.addPlayList(nameList,duration,user);
 				System.out.println("Se creo con exito");
 				}else{
 					System.out.println(" ¡ERROR! usuarios invalidos"+"\nNo se creo lista de reproduccion");
@@ -206,7 +233,7 @@ public class Main{
 				int name = numScan.nextInt();
 				if(mcs.positionValidUser(name)== true){
 					run= false;
-					mcs.addPlayList(nameList,duraccion,name);
+					mcs.addPlayList(nameList,duration,name);
 					System.out.println("Se creo con exito");
 				}else{
 					System.out.println("¡ERROR! Usuario invalido"+"\n No se creo lista de reproduccion");
@@ -219,11 +246,16 @@ public class Main{
 		}
 		
 	}
-	public void calificarPublic(){
-		if(mcs.validacionExistenciaPublic()== true){
+	/**
+	*ratePublic: rate public playlists
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/	
+	public void ratePublic(){
+		if(mcs.publicExistenceValidation()== true){
 				System.out.println("Listas de reproduccion que puede calificar");
 				System.out.println("Elija una opcion");
-				System.out.println(mcs.calificacion());
+				System.out.println(mcs.qualification());
 				int choice = numScan.nextInt();
 				boolean run = true;
 				while(run){
@@ -241,15 +273,35 @@ public class Main{
 		System.out.println("No hay listas de reproduccion publicas");
 	}
 	}
+	/**
+	*showUser: print the users
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/
 	public void showUser(){
 		System.out.println(mcs.showUser());
 	}
+	/**
+	*showSong: print the song
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/
 	public void showSongs(){
 		System.out.println(mcs.showSongs());
 	}
+	/**
+	*showList: print the list song
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/
 	public void showList(){
 		System.out.println(mcs.showList());
 	}
+	/**
+	*addSongPlay: add song to playlist
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*/
 	public void addSongPlay(){
 		if(mcs.existenceUser()== true && mcs.existenceSongs()== true){
 		int contador = 1;
@@ -258,30 +310,30 @@ public class Main{
 		System.out.println(mcs.showLists());
 		int numList= numScan.nextInt();
 		if(mcs.positionValidPlayList(numList) == true){
-		if(mcs.verificadorPlayList(numList)==1){ // public
+		if(mcs.playListChecker(numList)==1){ // public
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
 			if(mcs.positionValidSong(numSong) == true){
 			mcs.addSongPlay(numList,numSong);
-			mcs.addGenrePay(numList,numSong);
+			mcs.addGenrePlaylist(numList,numSong);
 			}else{
 				System.out.println("La cancion no existe");
 				
 			}
 		}
-		else if(mcs.verificadorPlayList(numList)== 2){// private
+		else if(mcs.playListChecker(numList)== 2){// private
 		boolean run = true;
 		while(run){
 		System.out.println("Escriba el usuario editor");
-		String usuario= scan.nextLine();
-		if(mcs.validar(numList,usuario)== true && contador != 3 ){
+		String user= scan.nextLine();
+		if(mcs.validate(numList,user)== true && contador != 3 ){
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
 			if(mcs.positionValidSong(numSong)==true){
 			mcs.addSongPlay(numList,numSong);
-			mcs.addGenrePay(numList,numSong);
+			mcs.addGenrePlaylist(numList,numSong);
 			run = false ;
 			}else{
 				System.out.println("La cancion no existe");
@@ -292,7 +344,7 @@ public class Main{
 			System.out.println("Error en el usuario");
 			contador++;
 			attempts= attempts-1;
-			System.out.println("Le que dan "+attempts+" intentos");
+			System.out.println("Le quedan "+attempts+" intentos");
 			if(attempts == 0){
 				System.out.println("¡ No eres el editor !");
 				run = false;
@@ -301,18 +353,18 @@ public class Main{
 		}
 		}
 		}
-		else if(mcs.verificadorPlayList(numList)== 3){// restringed 
+		else if(mcs.playListChecker(numList)== 3){// restringed 
 		boolean run = true;
 		while(run){
 		System.out.println("Escriba el usuario editor");
-		String usuario= scan.nextLine();
-		if(mcs.validar(numList,usuario)== true ){
+		String user= scan.nextLine();
+		if(mcs.validate(numList,user)== true ){
 			System.out.println("Escoja el numero de la cancion");
 			System.out.println(mcs.showSong());
 			int numSong = numScan.nextInt();
 			if(mcs.positionValidSong(numSong)==true){
 			mcs.addSongPlay(numList,numSong);
-			mcs.addGenrePay(numList,numSong);
+			mcs.addGenrePlaylist(numList,numSong);
 			run = false ;
 			}
 			else{
@@ -324,7 +376,7 @@ public class Main{
 			System.out.println("Error en el usuario");
 			contador++;
 			attempts= attempts-1;
-			System.out.println("Le que dan "+attempts+" intentos");
+			System.out.println("Le quedan "+attempts+" intentos");
 			if(attempts == 0){
 				System.out.println("¡ No eres el editor !");
 				run = false;

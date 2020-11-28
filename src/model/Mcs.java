@@ -7,7 +7,10 @@ public class Mcs {
 	public static final int MAX_PLAYLIST = 20 ;
 	public static final int MAX_SONGS = 30 ;
 	private String[] countain ;
-	
+	/**
+	 * Constructor
+	 *initialize variables
+	 */
 	public Mcs(){
 		users = new User[MAX_USERS];
 		playLists = new PlayList[MAX_PLAYLIST];
@@ -15,11 +18,19 @@ public class Mcs {
 		countain = new String[MAX_USERS];
 		
 	}
-	// añadir usuario 
-	public void addUser(String nombre, String clave,int edad ){
+	/**
+	*addUser: add user a arrays
+	*<b> pre: </b>
+	*<b> pos: </b> add user
+	*@param  name is a String
+	*@param key is a String
+	*@param age is a int
+	*/
+	
+	public void addUser(String name, String key,int age ){// añadir usuario 
 		String category= "NEWBIE";
 		boolean run = false;
-		User user = new User(nombre,clave,edad,category);
+		User user = new User(name,key,age,category);
 		for(int i= 0;(i<users.length)&& !run;i++){
 			if(users[i] == null){
 				users[i] = user;
@@ -27,8 +38,14 @@ public class Mcs {
 			}
 		}
 	}
-	// existencia del public 
-	public boolean validacionExistenciaPublic(){
+	/**
+	*publicExistenceValidation : validate that there is a public playlist
+	*<b> pre: </b>
+	*<b> pos: </b> 
+	*@return out is a boolean
+	*/
+	
+	public boolean publicExistenceValidation(){
 		boolean out = false;
 		for(int i = 0;i< playLists.length; i++){
 			if(playLists[i] != null){
@@ -39,8 +56,13 @@ public class Mcs {
 		}
 		return out;	
 	}
-	// calificacion del public
-	public String calificacion(){
+	/**
+	*qualification: validate that there is a public playlist
+	*<b> pre: </b>
+	*<b> pos: </b> 
+	*@return String text
+	*/
+	public String qualification(){
 		String out = "";
 		for(int i = 0;i< playLists.length; i++){
 			if(playLists[i] != null){
@@ -51,7 +73,14 @@ public class Mcs {
 		}
 		return out;	
 	}
-	// Cambio de calificacion
+	/**
+	*changeRating: 
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  choice is a int
+	*@param qualification is a int
+	*@return String text
+	*/
 	public String changeRating(int choice, int qualification){
 		String out = "ESCOJA UNA OPCION VALIDA";
 		if(playLists[choice] instanceof Public ){
@@ -62,26 +91,37 @@ public class Mcs {
 		return out;
 		
 	}
-	//verificacion tipo de lista de Reproduccion
-	public int verificadorPlayList(int posicion){
+	/**
+	*changeRating: to change the public playlist rating
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  position is a int
+	*@return int position
+	*/
+	public int playListChecker(int position){
 		int num = 0;
-			if(playLists[posicion] != null){
-				if(playLists[posicion] instanceof Public ){
+			if(playLists[position] != null){
+				if(playLists[position] instanceof Public ){
 					num = 1;
 				}
-				if(playLists[posicion] instanceof Private){
+				if(playLists[position] instanceof Private){
 					num = 2;
 				}
-				else if(playLists[posicion] instanceof Restringed){
+				else if(playLists[position] instanceof Restringed){
 					num = 3;
 				}
 			}
 		
 		return num;
 	}
+	/**
+	*showUser: print registered users
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String text
+	*/
 	
-	
-	public String showUser(){ // users completos datos 
+	public String showUser(){ 
 		String text = "";
 		for(int i = 0; (i<users.length);i++){
 			if(users[i] != null){
@@ -90,8 +130,13 @@ public class Mcs {
 		}
 		return text;
 	}
-	
-	public String showSongs(){ //songs 
+	/**
+	*showSongs: print registered songs
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String text
+	*/
+	public String showSongs(){ 
 		String text = "";
 		for(int i = 0; (i < poolSongs.length);i++){
 			if(poolSongs[i] != null ){
@@ -100,7 +145,13 @@ public class Mcs {
 		}
 		return text;
 	}
-	public String showList(){ //Playlist
+	/**
+	*showList: print registered list
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String text
+	*/
+	public String showList(){ 
 	String text = "";
 		for(int i = 0; (i < playLists.length);i++){
 			if(playLists[i] != null ){
@@ -109,7 +160,13 @@ public class Mcs {
 		}
 		return text;
 	}
-	public String nameUser(){ // solo nombre usuarios 
+	/**
+	*showUser: print registered name users
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String text
+	*/
+	public String nameUser(){ 
 		String text = "";
 		for(int i = 0; (i<users.length);i++){
 			if(users[i] != null){
@@ -118,7 +175,13 @@ public class Mcs {
 		}
 		return text;
 	}
-	public String showSong(){ //Solo nombre cancion 
+	/**
+	*showUser: print registered songs
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String text
+	*/
+	public String showSong(){ 
 	String text = "";
 		for(int i = 0; (i < poolSongs.length);i++){
 			if(poolSongs[i] != null ){
@@ -127,7 +190,13 @@ public class Mcs {
 		}
 		return text;
 	}
-	public String showLists(){ //solo nombre Playlist
+	/**
+	*showLits: print registered list
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return String text
+	*/
+	public String showLists(){ 
 	String text = "";
 		for(int i = 0; (i < playLists.length);i++){
 			if(playLists[i]!= null ){
@@ -136,34 +205,59 @@ public class Mcs {
 		}
 		return text;
 	}
-	
-	public boolean validar(int numList , String usuario){
+	/**
+	*validate: validates that the user is the editor
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  numList is a int
+	*@param  user is a String
+	*@return boolean out
+	*/
+	public boolean validate(int numList , String user){
 		boolean out = false;
 		
-		if(playLists[numList].revisarUsuario(usuario)== true){
+		if(playLists[numList].checkUser(user)== true){
 			out= true;	
 		}
 		return out;
 	}
-
-	//Cambio del tiempo playLists
+	/**
+	*addSongPlay: add a song to mcs
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  numList is a int
+	*@param  numSong is a int
+	*/
 	public void addSongPlay(int numList,int numSong){
-		int time =poolSongs[numSong].getDuraccion();
+		int time =poolSongs[numSong].getDuration();
 		playLists[numList].updateDuration(time);
 	}
-	//cambio genero Playlist
-	public void addGenrePay(int numList,int numSong){
+	/**
+	*addGenrePlaylist: add the genre of the song to the playlist
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  numList is a int
+	*@param  numSong is a int
+	*/
+	public void addGenrePlaylist(int numList,int numSong){
 		String genre =poolSongs[numSong].getGenero().toString();
 		playLists[numList].updateGenre(genre);
 	}
-	// restringida
-	public void addPlayList(String name,int duraccion,int[] userIndex){
+	/**
+	*addPlayList: add the genre of the song to the playlist
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  name is a String
+	*@param  duration is a int
+	*@param userIndex is a arrays
+	*/
+	public void addPlayList(String name,int duration,int[] userIndex){
 		String genre = "";
 		User[] user = new User[userIndex.length];
 		for(int i =0;i< userIndex.length;i++){
 			user[i]=users[userIndex[i]];
 		}
-		PlayList list = new Restringed(name,duraccion,genre,user);
+		PlayList list = new Restringed(name,duration,genre,user);
 			boolean run = false ;
 			for(int i = 0 ; (i < playLists.length) && !run; i++){
 				if(playLists[i] == null){
@@ -172,11 +266,17 @@ public class Mcs {
 				}	
 			}
 	}
-	//public
-	public void addPlayList(String name,int duraccion){
+	/**
+	*addPlayList: create a public playlist
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  name is a String
+	*@param  duration is a int
+	*/
+	public void addPlayList(String name,int duration){
 		String genre = "";
 		double calificacion = 0;
-		PlayList list = new Public(name,duraccion,genre,calificacion);
+		PlayList list = new Public(name,duration,genre,calificacion);
 		boolean run = false ;
 			for(int i = 0 ; (i < playLists.length) && !run; i++){
 				if(playLists[i] == null){
@@ -187,12 +287,19 @@ public class Mcs {
 				
 			}
 	}
-	// private
-	public void addPlayList(String name,int duraccion,int name1){
+	/**
+	*addPlayList: create a private playlist
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  name is a String
+	*@param  duration is a int
+	*@param name1 int
+	*/
+	public void addPlayList(String name,int duration,int name1){
 		String genre = "";
 		User user ;
 		user = users[name1];
-		PlayList list = new Private(name,duraccion,genre,user);
+		PlayList list = new Private(name,duration,genre,user);
 			boolean run = false ;
 			for(int i = 0 ; (i < playLists.length) && !run; i++){
 				if(playLists[i] == null){
@@ -203,11 +310,23 @@ public class Mcs {
 				
 			}
 	}
-	public String addSong(String titulo,String artista,String fechaLanzamiento ,int duraccion,String genero,int posicion){
+	/**
+	*addSong: create a song in the collection
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param  title is a String
+	*@param  artist is a String
+	*@param  releaseDate is a String
+	*@param  duration is a int
+	*@param  genre is a String
+	*@param position is a int
+	*@return String text
+	*/
+	public String addSong(String title,String artist,String releaseDate ,int duration,String genre,int position){
 		String text ="";		
-				if(users[posicion]!= null){
-				users[posicion].countainSong();
-				Song list = new Song(titulo,artista,fechaLanzamiento,duraccion,genero,users[posicion]);
+				if(users[position]!= null){
+				users[position].countainSong();
+				Song list = new Song(title,artist,releaseDate,duration,genre,users[position]);
 				boolean run = false;
 				for(int i = 0; (i< poolSongs.length) && !run; i++ ){
 					if(poolSongs[i] == null){
@@ -221,6 +340,12 @@ public class Mcs {
 				}
 				return text;
 	}
+	/**
+	*existenceUser: validates that the user is created
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return boolean out
+	*/
 	public boolean existenceUser(){
 		boolean out = false;
 		for(int i = 0; i< users.length; i++){
@@ -230,6 +355,11 @@ public class Mcs {
 		}
 		return out;
 	}
+	/**	*existenceUser: validates that the song is created
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return boolean out
+	*/
 	public boolean existenceSongs(){
 		boolean out = false;
 		for(int i= 0;i< poolSongs.length;i++){
@@ -239,23 +369,44 @@ public class Mcs {
 		}
 		return out;
 	}
-	public boolean positionValidSong(int posicion){
+	/**
+	*positionValidSong: validate that the position of the song is correct
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param position is a int 
+	*@return boolean out
+	*/
+	public boolean positionValidSong(int position){
 		boolean out = false;
-		if(poolSongs[posicion] != null){
+		if(poolSongs[position] != null){
 			out = true;
 		}
 		return out;
 	}
-	public boolean positionValidPlayList(int posicion){
+	/**
+	*positionValidPlayList: validate that the position of the playLists is correct
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@return boolean out
+	*@param position is a int
+	*/
+	public boolean positionValidPlayList(int position){
 		boolean out = false;
-		if(playLists[posicion] != null){
+		if(playLists[position] != null){
 			out = true;
 		}
 		return out;
 	}
-	public boolean positionValidUser(int posicion){
+	/**
+	*positionValidUser: validate that the position of the user is correct
+	*<b> pre: </b>
+	*<b> pos: </b>
+	*@param position is a int
+	*@return boolean out
+	*/
+	public boolean positionValidUser(int position){
 		boolean out = false;
-		if(users[posicion] != null){
+		if(users[position] != null){
 			out = true;
 		}
 		return out;
